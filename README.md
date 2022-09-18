@@ -15,15 +15,16 @@ Copy the contents of the `📁defaultconfigs/` folder into `/etc/cc-ip` in Compu
 Some examples are available in the `📁examples/` folder.
 
 ### Configuration
-Configuration files are stored in `/etc/cc-ip`
+Server HTML Pages are located at `/etc/cc-ip/pages`
 
-| Name | Location |
+
+<!-- | Name | Location |
 | ---- | -------- |
 | Client Configuration | `/etc/cc-ip/config-client.lua` |
 | Server Configuration | `/etc/cc-ip/config-server.lua` |
 | DNS Server Configuration | `/etc/cc-ip/config-dns.llua.lua` |
 | Server HTML Pages | `/etc/cc-ip/server/pages/` |
-| DNS Lookup Table | `/etc/cc-ip/dns/lookuptable.lua` |
+| DNS Lookup Table | `/etc/cc-ip/dns/lookuptable.lua` | -->
 
 ### Client
 ```lua

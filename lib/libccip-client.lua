@@ -1,47 +1,50 @@
 -- CC-IP Library (libccip)
 -- Client implementation
 
-os.loadAPI("libccip-common.lua")
+require("libccip-common")
 
-rednet.open("top")
-proto = "MC-IP"
-dnsIP = "300.400.050.001"
+CCIPClient = {}
 
-function sendFromIP(Input, Type)
-	if Type == "GET" then
-		svID = rednet.lookup(proto, Input)
-		rednet.send(svID, Type, proto)
-	end
+--- Initialize CCIP client
+-- @param PeripheralID Side or ID of the modem
+-- @param Protocol Your protocol of choice
+-- @param IP Address of the DNS server
+function CCIPClient:init(PeripheralID, Protocol, DNSAddress)
+	rednet.open(PeripheralID)
+	LibCCIP.Proto = Protocol
+	LibCCIP.DNSAddr = DNSAddress
 end
 
-function sendFromDomain(Input, Type)
-	dnsID = rednet.lookup(proto, dnsIP)
-	rednet.send(dnsID, "RESOLVE#" .. Input, proto)
-
-	id, msg = rednet.receive(proto)
-	print(Input .. " resolved to " .. msg)
-
-	sendFromIP(msg, Type)
-end
-
-function client()
-	-- ask user
-	print("DNS Server is " .. dnsIP)
-	write("Enter URL: http://")
-	input = read()
-
-	-- determine if IP or domain
-	-- all CC-IP addresses start with 300
-	if string.starts(input, "300") then
-		sendFromIP(input, "GET")
+--- Send a request
+-- @param Address IP address or domain name of the destination
+-- @param Type Type of the request
+-- @param Payload Payload to send
+function CCIPClient:request(Address, Type, Payload)
+	if string.starts(Address, "300") then
+		LibCCIP.sendFromIP(Address, Type, Payload or "")
 	else
-		sendFromDomain(input, "GET")
+		LibCCIP.sendFromDomain(Address, Type, Payload or "")
 	end
-
-	id, msg = rednet.receive(proto)
-	print(msg)
-
-	client()
 end
 
-client()
+-- function client()
+-- 	-- ask user
+-- 	print("DNS Server is " .. dnsIPP)
+-- 	write("Enter URL: http://")
+-- 	input = read()
+
+-- 	-- determine if IP or domain
+-- 	-- all CC-IP addresses start with 300
+-- 	if string.starts(input, "300") then
+-- 		libccip.sendFromIP(input, "GET")
+-- 	else
+-- 		libccip.sendFromDomain(input, "GET")
+-- 	end
+
+-- 	id, msg = rednet.receive(proto)
+-- 	print(msg)
+
+-- 	client()
+-- end
+
+-- client()

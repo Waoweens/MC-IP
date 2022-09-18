@@ -1,1 +1,0 @@
--- CC-IP Library (libccip)
