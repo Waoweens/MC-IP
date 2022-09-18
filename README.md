@@ -1,3 +1,3 @@
 # MC-IP
 
-internet protocol for block game
+""Internet"" system for ComputerCraft
