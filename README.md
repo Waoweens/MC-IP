@@ -3,7 +3,7 @@
 ""Internet"" system for ComputerCraft (ab)using the Rednet API
 
 ## Installation
-## Automatic installer (WIP)
+### Automatic installer (WIP)
 Coming soon
 
 ### Manual
@@ -14,7 +14,7 @@ Copy the contents of the `📁defaultconfigs/` folder into `/etc/cc-ip` in Compu
 ## Usage (WIP)
 Some examples are available in the `📁examples/` folder.
 
-## Configuration
+### Configuration
 Configuration files are stored in `/etc/cc-ip`
 
 | Name | Location |
