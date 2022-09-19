@@ -1,29 +1,43 @@
 -- CC-IP Library (libccip)
 -- Client implementation
 
-require("libccip-common")
+require("/lib/cc-ip/libccip-common")
+local lc = LibCCIP
 
 CCIPClient = {}
+CCIPClient.Proto = nil
+CCIPClient.DNSAddr = nil
 
 --- Initialize CCIP client
--- @param PeripheralID Side or ID of the modem
--- @param Protocol Your protocol of choice
--- @param IP Address of the DNS server
+-- @param PeripheralID[String] Side or ID of the modem
+-- @param Protocol[String] Your protocol of choice
+-- @param IP Address[String] of the DNS server
 function CCIPClient:init(PeripheralID, Protocol, DNSAddress)
 	rednet.open(PeripheralID)
-	LibCCIP.Proto = Protocol
-	LibCCIP.DNSAddr = DNSAddress
+	CCIPClient.Proto = Protocol
+	CCIPClient.DNSAddr = DNSAddress
 end
 
 --- Send a request
--- @param Address IP address or domain name of the destination
--- @param Type Type of the request
--- @param Payload Payload to send
+-- @param Address[String] IP address or domain name of the destination
+-- @param Type[String] Type of the request
+-- @param Payload[String] Payload to send
 function CCIPClient:request(Address, Type, Payload)
 	if string.starts(Address, "300") then
-		LibCCIP.sendFromIP(Address, Type, Payload or "")
+		lc:sendFromIP(Address, Type, Payload or "")
 	else
-		LibCCIP.sendFromDomain(Address, Type, Payload or "")
+		lc:sendFromDomain(Address, Type, Payload or "")
+	end
+end
+
+--- Listen for requests
+-- @param Protocol[String] Your protocol of choice
+-- @param Blocking[Bool] Whether the listen should block the code or not
+function CCIPClient:listen(Protocol, Blocking)
+	if Blocking == false or nil then
+		parallel.waitForAll(rednet.listen(Protocol))
+	else
+		rednet.listen(Protocol)
 	end
 end
 

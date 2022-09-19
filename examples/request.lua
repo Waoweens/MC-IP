@@ -1,6 +1,6 @@
 -- Simple CLI CC-IP requester
 
-require("/lib/cc-ip/libccip.h")
+dofile("/lib/cc-ip/libccip.lua")
 
 local client = CCIPClient;
 
