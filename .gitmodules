@@ -1,0 +1,3 @@
+[submodule "gabbro-browser"]
+	path = gabbro-browser
+	url = ./gabbro-browser
