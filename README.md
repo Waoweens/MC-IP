@@ -20,7 +20,7 @@ Some examples are available in the `📁examples/` folder.
 ```lua
 require("/lib/cc-ip/libccip")
 local client = CCIPClient
-local modem = "top"
+local modem = "modem_2" -- can be side (like "top") or ID (like "modem_15") 
 local proto = "RNP/IP"
 local dnsIP = "300.400.50.1"
 

@@ -5,4 +5,7 @@ symlinks/
 # work in progress
 installer.lua
 
+# external libraries
+lib/cobalt
+
 # configuration
