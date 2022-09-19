@@ -3,7 +3,7 @@
 
 LibCCIP = {}
 
---- String starts with function I stole from stackoverflow
+--- String startswith function I stole from stackoverflow
 -- https://stackoverflow.com/questions/22831701/lua-read-beginning-of-a-string
 -- @param String[String] String to read
 -- @param Start[String] String to match
@@ -18,6 +18,7 @@ end
 -- @param Payload[String] Payload to send
 function LibCCIP:sendFromIP(Protocol, Address, Type, Payload)
 	if Type == "GET" then
+		print(Protocol..Address)
 		local svID = rednet.lookup(Protocol, Address)
 		rednet.send(svID, Type, Protocol)
 	end

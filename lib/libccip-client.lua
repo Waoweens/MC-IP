@@ -1,7 +1,7 @@
 -- CC-IP Library (libccip)
 -- Client implementation
 
-require("/lib/cc-ip/libccip-common")
+dofile("/lib/cc-ip/libccip-common.lua")
 local lc = LibCCIP
 
 CCIPClient = {}
@@ -24,41 +24,13 @@ end
 -- @param Payload[String] Payload to send
 function CCIPClient:request(Address, Type, Payload)
 	if string.starts(Address, "300") then
-		lc:sendFromIP(Address, Type, Payload or "")
+		lc:sendFromIP(CCIPClient.Proto, Address, Type, Payload or "")
 	else
-		lc:sendFromDomain(Address, Type, Payload or "")
+		lc:sendFromDomain(CCIPClient.Proto, Address, Type, Payload or "")
 	end
 end
 
 --- Listen for requests
--- @param Protocol[String] Your protocol of choice
--- @param Blocking[Bool] Whether the listen should block the code or not
-function CCIPClient:listen(Protocol, Blocking)
-	if Blocking == false or nil then
-		parallel.waitForAll(rednet.listen(Protocol))
-	else
-		rednet.listen(Protocol)
-	end
+function CCIPClient:listen()
+	return rednet.receive(CCIPClient.Proto)
 end
-
--- function client()
--- 	-- ask user
--- 	print("DNS Server is " .. dnsIPP)
--- 	write("Enter URL: http://")
--- 	input = read()
-
--- 	-- determine if IP or domain
--- 	-- all CC-IP addresses start with 300
--- 	if string.starts(input, "300") then
--- 		libccip.sendFromIP(input, "GET")
--- 	else
--- 		libccip.sendFromDomain(input, "GET")
--- 	end
-
--- 	id, msg = rednet.receive(proto)
--- 	print(msg)
-
--- 	client()
--- end
-
--- client()

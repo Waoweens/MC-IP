@@ -1,7 +1,6 @@
 -- CC-IP Library (libccip)
 -- DNS implementation
-os.loadAPI("libccip-common.lua")
-os.loadAPI("/etc/cc-ip/dns.lua")
+dofile("/lib/cc-ip/libccip-common.lua")
 
 rednet.open("top")
 proto = "MC-IP"

@@ -16,28 +16,36 @@ Copy the contents of the `📁lib/` folder into `/lib/cc-ip` in ComputerCraft.
 ## Usage (WIP)
 Some examples are available in the `📁examples/` folder.
 
-### Configuration
-Server HTML Pages are located at `/etc/cc-ip/pages`
-
-<!-- | Name | Location |
-| ---- | -------- |
-| Client Configuration | `/etc/cc-ip/config-client.lua` |
-| Server Configuration | `/etc/cc-ip/config-server.lua` |
-| DNS Server Configuration | `/etc/cc-ip/config-dns.llua.lua` |
-| Server HTML Pages | `/etc/cc-ip/server/pages/` |
-| DNS Lookup Table | `/etc/cc-ip/dns/lookuptable.lua` | -->
-
 ### Client
 ```lua
-os.loadAPI("/lib/cc-ip/libccip.lua")
+require("/lib/cc-ip/libccip")
+local client = CCIPClient
+local modem = "top"
+local proto = "RNP/IP"
+local dnsIP = "300.400.50.1"
+
+client:init(modem, proto, dnsIP)
+
+local function main()
+	client:request("www.test.com", "GET")
+	local id, msg = client:listen()
+	print(msg)
+
+	client:request("300.129.40.104", "GET")
+	local id, msg = client:listen()
+	print(msg)
+
+	main()
+end
+main()
 ```
 
 ### Server
 ```lua
-os.loadAPI("/lib/cc-ip/libccip.lua")
+require("/lib/cc-ip/libccip")
 ```
 
 ### DNS Server
 ```lua
-os.loadAPI("/lib/cc-ip/libccip.lua")
+require("/lib/cc-ip/libccip")
 ```
