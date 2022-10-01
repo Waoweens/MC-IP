@@ -13,6 +13,11 @@ Copy the contents of the `📁lib/` folder into `/lib/cc-ip` in ComputerCraft.
 
 <!-- Copy the contents of the `📁defaultconfigs/` folder into `/etc/cc-ip` in ComputerCraft. -->
 
+## Gabbro Browser
+[Gabbro Browser](https://github.com/Waoweens/CC-IP/tree/main/gabbro-browser) is a web browser for CC-IP made with the [Basalt UI framework](https://basalt.madefor.cc/).
+
+A submodule is provided for easier development.
+
 ## Usage (WIP)
 Some examples are available in the `📁examples/` folder.
 

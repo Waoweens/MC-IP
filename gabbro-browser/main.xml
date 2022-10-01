@@ -1,0 +1,3 @@
+<frame bg="red">
+	<button x="2" y="2" width="17" text="Example Button!"/>
+</frame>

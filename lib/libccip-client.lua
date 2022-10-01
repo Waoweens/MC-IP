@@ -1,7 +1,6 @@
 -- CC-IP Library (libccip)
 -- Client implementation
 
-dofile("/lib/cc-ip/libccip-common.lua")
 local lc = LibCCIP
 
 CCIPClient = {}

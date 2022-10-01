@@ -1,6 +1,5 @@
 -- CC-IP Library (libccip)
 -- Server implementation
-require("/lib/cc-ip/libccip-common")
 
 CCIPServer = {}
 CCIPServer.Proto = nil
