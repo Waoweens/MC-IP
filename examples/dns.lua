@@ -1,7 +1,3 @@
--- CC-IP Library (libccip)
--- DNS implementation
-dofile("/lib/cc-ip/libccip-common.lua")
-
 rednet.open("top")
 proto = "MC-IP"
 ip = "300.400.050.001"
@@ -12,7 +8,7 @@ function resolve()
 	print("Received " .. msg .. " from " .. id)
 
 	if string.starts(msg, "RESOLVE#") then
-		d, domain = msg:match("^(.+)%^(.+)$")
+		d, domain = msg:match("^(.+)[%x6](.+)$")
 		print(domain)
 		rednet.send(id, servers[domain], proto)
 	end

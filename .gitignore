@@ -6,6 +6,6 @@ symlinks/
 installer.lua
 
 # external libraries
-lib/cobalt
+gabbro-browser/basalt.lua
 
 # configuration

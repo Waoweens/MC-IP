@@ -1,0 +1,15 @@
+<?xml version="1.1" standalone="yes"?>
+
+<frame id="mainFrame" bg="black">
+    <menubar id="barTab" width="parent.w - 1"></menubar>
+    <button onClick="exit" anchor="topRight" height="1" width="1" x="1" y="1" text="x" fg="white" bg="red" />
+    <frame y="2" width="parent.w" height="1" bg="lightGray">
+        <button height="1" width="1" x="1" text="&#27;" fg="black" bg="lightGray" />
+        <button height="1" width="1" x="2" text="&#174;" fg="black" bg="lightGray" />
+        <button height="1" width="1" x="3" text="&#26;" fg="black" bg="lightGray" />
+        <input x="5" width="parent.w - 6" height="1" fg="white" bg="black" default="Enter URL..."></input>
+        <button anchor="topRight" height="1" width="1" x="1" text="=" fg="black" bg="lightGray" />
+    </frame>
+    <scrollbar id="mainScroll" anchor="topRight" y="3" height="parent.h"></scrollbar>
+    <frame id="pageContent" y="3" width="parent.w - 1" bg="white" scrollable="true"></frame>
+</frame>

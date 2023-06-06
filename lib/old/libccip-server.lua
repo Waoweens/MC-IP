@@ -1,9 +1,17 @@
 -- CC-IP Library (libccip)
 -- Server implementation
 
-CCIPServer = {}
-CCIPServer.Proto = nil
-CCIPServer.IPAddr = nil
+-- relative paths are broken so we have to do this mess
+-- code stolen from https://github.com/Pyroxenium/Basalt/blob/master/Basalt/init.lua
+local curDir = fs.getDir(table.pack(...)[2]) or ""
+local defaultPath = package.path
+local format = "%s;/%s/?.lua;/%s/?/init.lua"
+package.path = string.format(format, package.path, curDir,curDir)
+local lc = require("libccip-common")
+package.path = defaultPath
+
+lc.Proto = nil
+lc.IPAddr = nil
 
 --- Initialize CCIP server
 --- @param PeripheralID string Side or ID of the modem
@@ -17,25 +25,15 @@ function CCIPServer:init(PeripheralID, Protocol, IPAddress, PagesLocation)
 	CCIPServer.IPAddr = IPAddress
 end
 
---- Initialize CCIP client
---- @param PeripheralID string Side or ID of the modem
---- @param Protocol string Your protocol of choice
---- @param DNSAddress string IP Address of the DNS server
-function CCIPServer:init(PeripheralID, Protocol, DNSAddress)
-	rednet.open(PeripheralID)
-	CCIPServer.Proto = Protocol
-	CCIPServer.DNSAddr = DNSAddress
-end
-
 --- Send a request
 --- @param Address string IP address or domain name of the destination
 --- @param Type string Type of the request
 --- @param Payload? string Payload to send
 function CCIPServer:request(Address, Type, Payload)
 	if string.starts(Address, "300") then
-		lc:sendFromIP(CCIPServer.Proto, Address, Type, Payload or "")
+		lc.sendFromIP(CCIPServer.Proto, Address, Type, Payload or "")
 	else
-		lc:sendFromDomain(CCIPServer.Proto, CCIPServer.DNSAddr, Address, Type, Payload or "")
+		lc.sendFromDomain(CCIPServer.Proto, CCIPServer.DNSAddr, Address, Type, Payload or "")
 	end
 end
 
