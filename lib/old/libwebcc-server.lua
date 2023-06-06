@@ -1,4 +1,4 @@
--- CC-IP Library (libccip)
+-- WebCC Library (libwebcc)
 -- Server implementation
 
 -- relative paths are broken so we have to do this mess
@@ -7,39 +7,41 @@ local curDir = fs.getDir(table.pack(...)[2]) or ""
 local defaultPath = package.path
 local format = "%s;/%s/?.lua;/%s/?/init.lua"
 package.path = string.format(format, package.path, curDir,curDir)
-local lc = require("libccip-common")
+local lc = require("libwebcc-common")
 package.path = defaultPath
 
 lc.Proto = nil
 lc.IPAddr = nil
 
---- Initialize CCIP server
+WebCCServer = {}
+
+--- Initialize WebCC server
 --- @param PeripheralID string Side or ID of the modem
 --- @param Protocol string Your protocol of choice
 --- @param IPAddress string IP Address of the DNS server
 --- @param PagesLocation string Location of the HTML pages
-function CCIPServer:init(PeripheralID, Protocol, IPAddress, PagesLocation)
+function WebCCServer:init(PeripheralID, Protocol, IPAddress, PagesLocation)
 	rednet.open(PeripheralID)
 	rednet.host(Protocol, IPAddress)
-	CCIPServer.Proto = Protocol
-	CCIPServer.IPAddr = IPAddress
+	WebCCServer.Proto = Protocol
+	WebCCServer.IPAddr = IPAddress
 end
 
 --- Send a request
 --- @param Address string IP address or domain name of the destination
 --- @param Type string Type of the request
 --- @param Payload? string Payload to send
-function CCIPServer:request(Address, Type, Payload)
+function WebCCServer:request(Address, Type, Payload)
 	if string.starts(Address, "300") then
-		lc.sendFromIP(CCIPServer.Proto, Address, Type, Payload or "")
+		lc.sendFromIP(WebCCServer.Proto, Address, Type, Payload or "")
 	else
-		lc.sendFromDomain(CCIPServer.Proto, CCIPServer.DNSAddr, Address, Type, Payload or "")
+		lc.sendFromDomain(WebCCServer.Proto, WebCCServer.DNSAddr, Address, Type, Payload or "")
 	end
 end
 
 --- Listen for requests
-function CCIPServer:listen()
-	return rednet.receive(CCIPServer.Proto)
+function WebCCServer:listen()
+	return rednet.receive(WebCCServer.Proto)
 end
 
 -- page = [[

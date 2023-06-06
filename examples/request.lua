@@ -1,6 +1,6 @@
--- Simple CLI CC-IP requester
+-- Simple CLI WebCC requester
 
-local client = require("/lib/cc-ip/libccip");
+local client = require("/lib/webcc/libwebcc");
 local modem = "top"
 local proto = "RNP/IP"
 local dnsIP = "300.400.50.1"

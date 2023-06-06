@@ -1,5 +1,5 @@
 -- Simple chat app
-local net = require("/lib/libccip")
+local net = require("/lib/webcc/libwebcc")
 local cfg = require("/network.lua")
 
 local proto = "RNP/IP"

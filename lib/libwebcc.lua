@@ -1,8 +1,8 @@
--- Computercraft Internet Protocl
+-- Computercraft Web (WebCC)
 -- Single file edition
--- https://github.com/Waoweens/CC-IP
+-- https://github.com/Waoweens/WebCC
 
-local LibCCIP = {}
+local LibWebCC = {}
 
 --- String startswith function I stole from stackoverflow
 --- https://stackoverflow.com/questions/22831701/lua-read-beginning-of-a-string
@@ -16,7 +16,7 @@ end
 --- @param Address string Destination IP address
 --- @param Type string Type of the request
 --- @param Payload string Payload to send
-function LibCCIP.sendFromIP(Protocol, Address, Type, Payload)
+function LibWebCC.sendFromIP(Protocol, Address, Type, Payload)
 	if Type == "GET" then
 		local svID = rednet.lookup(Protocol, Address)
 		rednet.send(svID, Type, Protocol)
@@ -37,22 +37,22 @@ end
 --- @param Domain string Destination Domain name
 --- @param Type string Type of the request
 --- @param Payload string Payload to send
-function LibCCIP.sendFromDomain(Protocol, DNSAddress, Domain, Type, Payload)
+function LibWebCC.sendFromDomain(Protocol, DNSAddress, Domain, Type, Payload)
 	local dnsID = parallel.waitForAll(rednet.lookup(Protocol, DNSAddress))
 	rednet.send(dnsID, "RESOLVE".. string.char(6) .. Domain, Protocol)
 
 	local id, msg = parallel.waitForAll(rednet.receive(Protocol))
 
-	LibCCIP.sendFromIP(Protocol, msg, Type, Payload)
+	LibWebCC.sendFromIP(Protocol, msg, Type, Payload)
 end
 
---- Initialize CCIP
+--- Initialize WebCC
 --- @param PeripheralID string Side or ID of the modem
 --- @param Protocol string Your protocol of choice
 --- @param IPAddress string IP Address of the computer
 --- @param Port? number Port of your application (Default 80)
 --- @param DNS? string IP Address of the DNS server
-function LibCCIP:init(PeripheralID, Protocol, IPAddress, Port, DNS)
+function LibWebCC:init(PeripheralID, Protocol, IPAddress, Port, DNS)
 	rednet.open(PeripheralID)
 	rednet.host(Protocol, IPAddress)
 	self.proto = Protocol .. ":" .. (Port or 80)
@@ -63,11 +63,11 @@ end
 --- @param Address string IP address or domain name of the destination
 --- @param Type string Type of the request
 --- @param Payload? string Payload to send
-function LibCCIP:request(Address, Type, Payload)
+function LibWebCC:request(Address, Type, Payload)
 	if string.starts(Address, "300") then
-		LibCCIP.sendFromIP(self.proto, Address, Type, Payload or "")
+		LibWebCC.sendFromIP(self.proto, Address, Type, Payload or "")
 	else
-		LibCCIP.sendFromDomain(self.proto, self.dnsAddr, Address, Type, Payload or "")
+		LibWebCC.sendFromDomain(self.proto, self.dnsAddr, Address, Type, Payload or "")
 	end
 end
 
@@ -76,8 +76,8 @@ end
 --- @return number senderID ID of the sender computer
 --- @return any message Message content
 --- @return string protocol Protocol of the sender computer
-function LibCCIP:listen(Timeout)
+function LibWebCC:listen(Timeout)
 	return rednet.receive(self.proto, Timeout or nil)
 end
 
-return LibCCIP
+return LibWebCC

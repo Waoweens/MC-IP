@@ -1,4 +1,4 @@
--- CC-IP Library (libccip)
+-- WebCC Library (libwebcc)
 -- DNS implementation
 
 -- relative paths are broken so we have to do this mess
@@ -8,7 +8,7 @@ local defaultPath = package.path
 local format = "%s;/%s/?.lua;/%s/?/init.lua"
 package.path = string.format(format, package.path, curDir,curDir)
 
-local lc = require("libccip-common")
+local lc = require("libwebcc-common")
 package.path = defaultPath
 
 rednet.open("top")

@@ -5,10 +5,10 @@ local defaultPath = package.path
 local format = "%s;/%s/?.lua;/%s/?/init.lua"
 package.path = string.format(format, package.path, curDir,curDir)
 
-local lcn = requite("libccip-common")
-local lct = require("libccip-client")
-local lsr = require("libccip-server")
-local lds = require("libccip-dns")
+local lcn = requite("libwebcc-common")
+local lct = require("libwebcc-client")
+local lsr = require("libwebcc-server")
+local lds = require("libwebcc-dns")
 
 package.path = defaultPath
 

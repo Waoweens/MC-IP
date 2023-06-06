@@ -1,4 +1,5 @@
-# CC-IP
+# WebCC
+> Formerly CC-IP
 
 ""Internet"" system for ComputerCraft (ab)using the Rednet API
 
@@ -7,24 +8,24 @@
 Coming soon
 
 ### Manual
-> Note: Due to a problem with relative paths, the library must be installed in `/lib/cc-ip` unless you modify the files.
+> Note: Due to a problem with relative paths, the library must be installed in `/lib/webcc` unless you modify the files.
 
-Copy the contents of the `📁lib/` folder into `/lib/cc-ip` in ComputerCraft.
+Copy the contents of the `📁lib/` folder into `/lib/webcc` in ComputerCraft.
 
-<!-- Copy the contents of the `📁defaultconfigs/` folder into `/etc/cc-ip` in ComputerCraft. -->
+<!-- Copy the contents of the `📁defaultconfigs/` folder into `/etc/webcc` in ComputerCraft. -->
 
 ## Gabbro Browser
-[Gabbro Browser](https://github.com/Waoweens/CC-IP/tree/main/gabbro-browser) is a web browser for CC-IP made with the [Basalt UI framework](https://basalt.madefor.cc/).
+[Gabbro Browser](https://github.com/Waoweens/WebCC/tree/main/gabbro-browser) is a web browser for WebCC made with the [Basalt UI framework](https://basalt.madefor.cc/).
 
-A submodule is provided for easier development.
+<!--A submodule is provided for easier development.-->
 
 ## Usage (WIP)
 Some examples are available in the `📁examples/` folder.
 
 ### Client
 ```lua
-require("/lib/cc-ip/libccip")
-local client = CCIPClient
+require("/lib/webcc/libwebcc")
+local client = WebCCClient
 local modem = "modem_2" -- can be side (like "top") or ID (like "modem_15") 
 local proto = "RNP/IP"
 local dnsIP = "300.400.50.1"
@@ -47,10 +48,29 @@ main()
 
 ### Server
 ```lua
-require("/lib/cc-ip/libccip")
+require("/lib/webcc/libwebcc")
 ```
 
 ### DNS Server
 ```lua
-require("/lib/cc-ip/libccip")
+require("/lib/webcc/libwebcc")
 ```
+
+## License
+## License
+WebCC
+
+Copyright (C) 2023  Meowcorp Group
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.

@@ -1,7 +1,7 @@
--- CC-IP Library (libccip)
+-- WebCC Library (libwebcc)
 -- Server implementation
 
-local server = require("/lib/cc-ip/libccip")
+local server = require("/lib/webcc/libwebcc")
 local modem = "top"
 local proto = "RNP/IP"
 local dnsIP = "300.400.50.1"

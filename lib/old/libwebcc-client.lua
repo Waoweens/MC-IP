@@ -1,4 +1,4 @@
--- CC-IP Library (libccip)
+-- WebCC Library (libwebcc)
 -- Client implementation
 
 -- relative paths are broken so we have to do this mess
@@ -8,16 +8,16 @@ local defaultPath = package.path
 local format = "%s;/%s/?.lua;/%s/?/init.lua"
 package.path = string.format(format, package.path, curDir,curDir)
 
-local lc = require("libccip-common")
+local lc = require("libwebcc-common")
 package.path = defaultPath
 
-local CCIPClient = {}
+local WebCCClient = {}
 
---- Initialize CCIP client
+--- Initialize WebCC client
 --- @param PeripheralID string Side or ID of the modem
 --- @param Protocol string Your protocol of choice
 --- @param DNSAddress string IP Address of the DNS server
-function CCIPClient:init(PeripheralID, Protocol, DNSAddress)
+function WebCCClient:init(PeripheralID, Protocol, DNSAddress)
 	rednet.open(PeripheralID)
 	self.proto = Protocol
 	self.dnsAddr = DNSAddress
@@ -28,7 +28,7 @@ end
 --- @param Address string IP address or domain name of the destination
 --- @param Type string Type of the request
 --- @param Payload? string Payload to send
-function CCIPClient:request(Address, Type, Payload)
+function WebCCClient:request(Address, Type, Payload)
 	if string.starts(Address, "300") then
 		lc.sendFromIP(self.proto, Address, Type, Payload or "")
 	else
@@ -37,8 +37,8 @@ function CCIPClient:request(Address, Type, Payload)
 end
 
 --- Listen for requests
-function CCIPClient:listen()
+function WebCCClient:listen()
 	return rednet.receive(self.proto)
 end
 
-return CCIPClient
+return WebCCClient
